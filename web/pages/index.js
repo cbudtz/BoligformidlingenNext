@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import {fetchAPI} from "../lib/api";
+import Link from "next";
 
- function Index({properties}) {
+function Index({properties}) {
     console.log(properties)
   return (
     <div>
@@ -11,8 +12,13 @@ import {fetchAPI} from "../lib/api";
       </Head>
 
       <main>
-          Data:
-          {JSON.stringify(properties)}
+
+          {properties.map((property)=><div>
+
+              <a href={"/home/"+property.id +"/" + property.Title}>{property.Title} - {property.id}</a>
+          </div>)}
+
+
       </main>
 
     </div>
