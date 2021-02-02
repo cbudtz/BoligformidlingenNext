@@ -1,0 +1,21 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    font-family: 'MontSerrat', sans-serif;
+}
+h2 {
+    font-family: 'MontSerrat', sans-serif !important;
+}
+
+.navbar {
+    text-transform: uppercase;
+}
+a {
+    color: black;
+    font-weight: bold;
+}
+a:hover {
+    text-underline: black;
+    color: black;
+}

@@ -1,26 +1,30 @@
 import Head from 'next/head'
 import {fetchAPI, getStrapiURL} from "../../lib/api";
 import {getStrapiMedia} from "../../lib/media";
+import TopBar from "../../components/TopBar";
+import React from "react";
 
-function Home({property}) {
+function Home({property, properties}) {
     //console.log(property)
     return (
         <div>
             <Head>
-                <title>Create Next App</title>
+                <title>Boligformidlingen - {property.title}</title>
                 <link rel="icon" href="/favicon.ico" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
             </Head>
 
             <main>
+                <TopBar properties={properties}/>
                 {property.description}
                 {property.images.map((image)=>
-                    <div>
+                    <div key={image.id}>
 
-                            <img src={getStrapiMedia(image)}
-                                srcSet={`${getStrapiMedia(image.formats.small)} 500w, 
+                        <img src={getStrapiMedia(image)}
+                             srcSet={`${getStrapiMedia(image.formats.small)} 500w, 
                                 ${getStrapiMedia(image.formats.medium)} 750w, 
                                 ${getStrapiMedia(image.formats.large)} 1000w`}
-                            />
+                        />
 
                         {image.name}
 
@@ -37,9 +41,9 @@ function Home({property}) {
 }
 
 export async function getServerSideProps(context){
-    console.log(JSON.stringify(context.query))
-    let data=  await fetchAPI("properties/"+context.query.home[0]);
-    return {props:{property:data}}
+    let property=  await fetchAPI("properties/"+context.query.home[0]);
+    let properties =  await fetchAPI("properties");
+    return {props:{property:property,properties:properties}}
 }
 
 export default Home;
