@@ -7,10 +7,11 @@ import React from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import MainJumbo from "../components/MainJumbo";
 import ReactMarkdown from 'react-markdown';
+import {getStrapiMedia} from "../lib/media";
 
 
 function Index({properties,pagematerials}) {
-    const verdensmal = pagematerials.filter((mat)=>mat.key==="verdensmal")[0]
+    const verdensmal = pagematerials.find((mat)=>mat.key==="verdensmal");
 
     return (
         <div>
@@ -28,32 +29,48 @@ function Index({properties,pagematerials}) {
             <main>
                 <TopBar properties={properties}/>
                 <MainJumbo>
-                    <h2>Gratis og uforpligtende vurdering</h2>
+                    <h3>Gratis og uforpligtende vurdering</h3>
                     <p>Vi giver vores professionelle vurdering af, hvor meget du kan forvente at udleje dit hjem for.</p>
                     <p>Hos Boligformidlingen kender vi lejerne og ved, hvad der tæller. Book tid i dag - det er gratis og helt
                         uforpligtende.</p>
-                    <h2><a href={"/book"}>Book Tid</a></h2>
+                    <h3><a href={"/book"}>Book Tid</a></h3>
                 </MainJumbo>
                 <Container>
                     <hr/>
                     <Row>
-                        <Col md={4} lg={6}>
-                            <Image width={939} height={788} layout="responsive" alt="Verdensmål" src={"/images/facebookannoncering.png"}/>
+                        <Col md={6} lg={4}>
+                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0])}/>
                         </Col>
-                        <Col md={8} lg={6}>
+                        <Col md={6}>
                             <ReactMarkdown children={verdensmal.text}/>
                         </Col>
-                        <Col md={4} lg={6}>
-                            test
+                        <Col md={6} lg={4}>
+                            {verdensmal.images[1] &&
+                            <img width={"66%"} src={getStrapiMedia(verdensmal.images[1].formats.small)}/>
+                            }
+                            {verdensmal.images[2] &&
+                            <img width={"33%"} src={getStrapiMedia(verdensmal.images[2].formats.small)}/>
+                            }
                         </Col>
+                    </Row>
+                </Container>
+                <hr/>
+                <Container>
+                    <Row>
+                        {properties.map(property=>
+                            <Col md={4}>
+                                <h3>{property.Title}</h3>
+                                <div>
+                                    {console.log(property)}
+                                    <img style={{width:"100%",height:"100%"}} src={getStrapiMedia(property.thumbnail.formats.small)}/>
+                                </div>
+                                <div style={{marginTop:24,marginBottom:24}}>
+                                    <a href={"/home/"+property.id} className={"ringbutton"}>More Info</a>
+                                </div>
+                            </Col>
+                        )}
 
                     </Row>
-
-                    {properties?.map((property) =>
-                        <div key={property.id}>
-                            <a href={"/home/" + property.id + "/" + property.Title}>{property.Title} - {property.id}</a>
-                        </div>)}
-
                 </Container>
 
 
@@ -64,9 +81,11 @@ function Index({properties,pagematerials}) {
 }
 
 export async function getServerSideProps(){
-    let properties=  await fetchAPI("properties");
-    let pagematerials = await fetchAPI("pagematerials")
-    
+    let propertytask = fetchAPI("properties");
+    let pagetask = fetchAPI("pagematerials");
+    let properties=  await propertytask;
+    let pagematerials = await pagetask;
+
     return {props:{properties:properties, pagematerials:pagematerials}}
 }
 

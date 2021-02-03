@@ -8,6 +8,5 @@ export function getStrapiURL(path = "") {
 export async function fetchAPI(path) {
     const requestUrl = getStrapiURL(path);
     const response = await fetch(requestUrl);
-    const data = await response.json();
-    return data;
+    return await response.json();
 }
