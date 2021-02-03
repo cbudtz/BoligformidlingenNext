@@ -11,7 +11,6 @@ import {getStrapiMedia} from "../lib/media";
 
 function Index({properties,pagematerials}) {
     const verdensmal = pagematerials.find((mat)=>mat.key==="verdensmal");
-    console.log(verdensmal.images[0].formats);
 
     return (
         <div>
