@@ -11,6 +11,7 @@ import {getStrapiMedia} from "../lib/media";
 
 function Index({properties,pagematerials}) {
     const verdensmal = pagematerials.find((mat)=>mat.key==="verdensmal");
+    console.log(verdensmal.images[0].formats);
 
     return (
         <div>
@@ -38,7 +39,7 @@ function Index({properties,pagematerials}) {
                     <hr/>
                     <Row>
                         <Col md={6} lg={4}>
-                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0].formats.large)}/>
+                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0].formats.medium)}/>
                         </Col>
                         <Col md={6}>
                             <ReactMarkdown children={verdensmal.text}/>
@@ -60,7 +61,6 @@ function Index({properties,pagematerials}) {
                             <Col md={4}>
                                 <h3>{property.Title}</h3>
                                 <div>
-                                    {console.log(property)}
                                     <img style={{width:"100%",height:"100%"}} src={getStrapiMedia(property.thumbnail.formats.small)}/>
                                 </div>
                                 <div style={{marginTop:24,marginBottom:24}}>
