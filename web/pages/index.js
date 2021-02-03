@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import {fetchAPI} from "../lib/api";
 
 import TopBar from "../components/TopBar";
