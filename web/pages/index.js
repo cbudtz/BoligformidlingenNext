@@ -7,6 +7,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import MainJumbo from "../components/MainJumbo";
 import ReactMarkdown from 'react-markdown';
 import {getStrapiMedia} from "../lib/media";
+import Image from 'next/image';
 
 
 function Index({properties,pagematerials}) {
@@ -38,7 +39,7 @@ function Index({properties,pagematerials}) {
                     <hr/>
                     <Row>
                         <Col md={6} lg={4}>
-                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0].formats.medium)}/>
+                            <Image layut={"responsive"} width={750} height={630} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0])}/>
                         </Col>
                         <Col md={6}>
                             <ReactMarkdown children={verdensmal.text}/>

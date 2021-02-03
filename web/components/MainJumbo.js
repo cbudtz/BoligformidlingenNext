@@ -1,6 +1,7 @@
 import {Jumbotron} from "react-bootstrap";
 import React from "react";
 
+
 export default function MainJumbo(props) {
     return <Jumbotron fluid style={{
         minHeight: 600,
