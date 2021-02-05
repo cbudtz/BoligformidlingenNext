@@ -39,7 +39,7 @@ function Index({properties,pagematerials}) {
                     <hr/>
                     <Row>
                         <Col md={6} lg={4}>
-                            <Image layut={"responsive"} width={750} height={630} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0])}/>
+                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0].formats.small)}/>
                         </Col>
                         <Col md={6}>
                             <ReactMarkdown children={verdensmal.text}/>
