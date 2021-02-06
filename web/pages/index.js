@@ -7,7 +7,6 @@ import {Col, Container, Row} from "react-bootstrap";
 import MainJumbo from "../components/MainJumbo";
 import ReactMarkdown from 'react-markdown';
 import {getStrapiMedia} from "../lib/media";
-import Image from 'next/image';
 
 
 function Index({properties,pagematerials}) {
