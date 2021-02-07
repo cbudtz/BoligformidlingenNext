@@ -10,3 +10,16 @@ export async function fetchAPI(path) {
     const response = await fetch(requestUrl);
     return await response.json();
 }
+
+export async function postAPI(path,data){
+    const requestUrl = getStrapiURL(path);
+    const response = await fetch(requestUrl,{
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(data)
+    })
+    return await response.text();
+}

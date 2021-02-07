@@ -18,14 +18,14 @@ function TopBar({properties}){
                 <Nav >
                     <NavDropdown title={"Homes for Rent"}>
                         {properties?.map((property)=>
-                            <NavDropdown.Item key={property.id} href={"/home/" + property.id} active={router.pathname==="/home/"+property.id}>
+                            <NavDropdown.Item eventkey={property.id} key={property.id} href={"/home/" + property.id} active={router.pathname==="/home/"+property.id}>
                                 {property.Title}
                             </NavDropdown.Item>
                         )}
 
                     </NavDropdown>
                     {pages.map(page=>
-                        <Nav.Link href={page.path} active={router.pathname===page.path}>
+                        <Nav.Link key={page.path} href={page.path} active={router.pathname===page.path}>
                             {page.title}
                         </Nav.Link>
                     )}

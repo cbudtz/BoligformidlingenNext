@@ -1,10 +1,12 @@
 import Head from 'next/head'
-import {fetchAPI} from "../lib/api";
-import React from "react";
-import {Container} from "react-bootstrap";
+import {fetchAPI, postAPI} from "../lib/api";
+import React, {useState} from "react";
+import {Container, Form,Button} from "react-bootstrap";
 import TopBar from "../components/TopBar";
+import {Formik} from "formik";
 
 function Contact({properties}) {
+    const [submitted, setSubmitted] = useState(false)
     return (
         <div>
             <Head>
@@ -15,11 +17,85 @@ function Contact({properties}) {
                 <script src={"/linkedin.js"}/>
                 <script src={"/fbpix.js"}/>
                 <script src={"/googleAnalytics.js"}/>
+                <script src={"https://www.google.com/recaptcha/api.js?render=6LepWk4aAAAAABnZBToPJ4HctBd2IaodkpsYbF2x"}/>
             </Head>
 
             <main>
                 <TopBar properties={properties}/>
                 <Container>
+                    <Formik
+                        initialValues={{email:"", text:""}}
+                        validate={values =>  {
+                            const errors = {};
+                            if (!values.email) {
+                                errors.email = 'Påkrævet';
+                            } else if (
+                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                                errors.email = 'ugyldig email adresse.';
+                            }
+                            return errors;
+                        }}
+                        onSubmit={(values,{resetForm})=>{
+                            console.log(values)
+                            resetForm({values:""});
+                            setSubmitted(true);
+                            grecaptcha.ready(function(){
+                                console.log("grecaptcha Ready")
+                                grecaptcha.execute('6LepWk4aAAAAABnZBToPJ4HctBd2IaodkpsYbF2x', {action:"submit"})
+                                    .then(function(token){
+                                        console.log("Got recaptcha token")
+                                        values.token = token;
+                                        postAPI("mail/rent",values);
+                                    }).catch((data)=>{
+                                        console.log("Something went wrong")
+                                })
+                            })
+
+                            setTimeout(()=>setSubmitted(false),3000);
+                        }}>
+                        {(
+                            {
+                                values,
+                                errors,
+                                touched,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit, isSubmitting
+                            }
+                        )=>(
+                            <>
+                                <Form.Group>
+                                    <Form.Label>Din email</Form.Label>
+                                    <Form.Control type={"email"} name={"email"}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur}
+                                                  value={values.email}
+                                                  isValid={touched.email && !errors.email}
+                                                  isInvalid={touched.email &&!!errors.email}
+                                    />
+                                                  <Form.Control.Feedback type={"invalid"}>{errors.email}</Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Din besked</Form.Label>
+                                    <Form.Control type={"textarea"} name={"text"}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur}
+                                                  value={values.text}
+                                                  as={"textarea"}
+                                                  rows={5}
+                                    />
+                                </Form.Group>
+                                <Button disabled={isSubmitting} variant={"primary"} onClick={handleSubmit}>
+                                    Send besked
+                                </Button>
+                                <hr/>
+                                {submitted && <h5>Tak for din henvendelse - Vi vil besvare den hurtigst muligt</h5>}
+                            </>
+                        )}
+
+
+                    </Formik>
 
                 </Container>
             </main>
