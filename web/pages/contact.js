@@ -66,7 +66,7 @@ function Contact({properties}) {
                         )=>(
                             <>
                                 <Form.Group>
-                                    <Form.Label>Din email</Form.Label>
+                                    <Form.Label>Din email adresse</Form.Label>
                                     <Form.Control type={"email"} name={"email"}
                                                   onChange={handleChange}
                                                   onBlur={handleBlur}
