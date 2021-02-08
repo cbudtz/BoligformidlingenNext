@@ -1,7 +1,6 @@
 FROM node:14-alpine
 
-WORKDIR /srv
-# uploads in /srv/public/uploads
+WORKDIR /buildpath
 
 COPY ./web/package.json ./
 COPY ./web/yarn.lock ./
