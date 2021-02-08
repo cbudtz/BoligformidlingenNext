@@ -8,8 +8,8 @@ COPY ./web/yarn.lock ./
 RUN yarn install
 
 COPY ./web/ .
-
-RUN yarn build
+ENV NEXT_PUBLIC_API_URL=https://boligformidlingenapi.4a4b.dk/
+RUN NEXT_PUBLIC_API_URL=https://boligformidlingenapi.4a4b.dk/ && yarn build
 
 EXPOSE 3000
 
