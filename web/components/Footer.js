@@ -6,7 +6,6 @@ import {useRouter} from "next/router";
 function Footer({pagematerials}){
     let router= useRouter();
     const footerText = pagematerials?.find((page)=>page.key==="footertext")
-    console.log(footerText);
     const socialicon = {fontSize:29,border:1,borderStyle:"solid",borderColor:"#ccc", borderRadius:"50%",
         display:"inline-block",width:"40px",height:"40px", marginLeft:"20px", lineHeight:"40px",textAlign:"center"};
     return  (<>

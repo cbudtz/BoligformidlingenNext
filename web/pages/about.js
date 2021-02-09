@@ -7,7 +7,7 @@ import {getStrapiMedia} from "../lib/media";
 import ReactMarkdown from "react-markdown";
 import Footer from "../components/Footer";
 
-function About({properties, pagematerials}) {
+function About({properties, pagematerials, pagemeta}) {
     const pagematerial = pagematerials.find((mat)=>mat.key==="about")
     const pagematerial2 = pagematerials.find((mat)=>mat.key==="about2")
     const arne = pagematerials.find((mat)=>mat.key==="arne")
@@ -15,8 +15,9 @@ function About({properties, pagematerials}) {
     return (
         <>
             <Head>
-                <title>Boligformidlingen</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <title>{pagemeta?.title}</title>
+                <meta name={"description"} content={pagemeta?.description}/>
+                <meta name={"keywords"} content={pagemeta?.keywords} />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
                 <link rel="stylesheet" href={"/fonts/font-awesome.min.css"}/>
                 <script src={"https://www.googletagmanager.com/gtag/js?id=UA-137703064-1"}/>
@@ -74,10 +75,12 @@ function About({properties, pagematerials}) {
 export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
     let pagetask = fetchAPI("pagematerials");
+    let pagemetatask = fetchAPI("pagemetas?key=about");
     let properties=  await propertytask;
     let pagematerials = await pagetask;
+    let pagemetas = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials}}
+    return {props:{properties:properties, pagematerials:pagematerials,pagemeta:pagemetas[0]}}
 }
 
 export default About;

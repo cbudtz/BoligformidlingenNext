@@ -4,15 +4,19 @@ import React, {useState} from "react";
 import {Container, Form,Button} from "react-bootstrap";
 import TopBar from "../components/TopBar";
 import {Formik} from "formik";
+import Footer from "../components/Footer";
 
-function Contact({properties}) {
+function Contact({properties,pagemeta}) {
     const [submitted, setSubmitted] = useState(false)
     return (
         <div>
             <Head>
-                <title>Boligformidlingen - Contact us</title>
+                <title>{pagemeta?.title}</title>
+                <meta name={"description"} content={pagemeta?.description}/>
+                <meta name={"keywords"} content={pagemeta?.keywords}/>
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
+                <link rel="stylesheet" href={"/fonts/font-awesome.min.css"}/>
                 <script src={"https://www.googletagmanager.com/gtag/js?id=UA-137703064-1"}/>
                 <script src={"/linkedin.js"}/>
                 <script src={"/fbpix.js"}/>
@@ -23,6 +27,7 @@ function Contact({properties}) {
             <main>
                 <TopBar properties={properties}/>
                 <Container>
+                    <h3>Feel free to contact us</h3>
                     <Formik
                         initialValues={{email:"", text:""}}
                         validate={values =>  {
@@ -98,6 +103,7 @@ function Contact({properties}) {
                     </Formik>
 
                 </Container>
+                <Footer/>
             </main>
 
         </div>
@@ -106,7 +112,9 @@ function Contact({properties}) {
 
 export async function getServerSideProps(context){
     let propertiestask =  fetchAPI("properties");
-    return {props:{properties:await propertiestask}}
+    let pagemetatask =  fetchAPI("pagemetas?key=contact");
+    const pagemeta = await pagemetatask
+    return {props:{properties:await propertiestask, pagemeta: pagemeta[0]}}
 }
 
 export default Contact;

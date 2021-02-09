@@ -10,13 +10,16 @@ import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
 
 
-function Index({properties,pagematerials}) {
+function Index({properties,pagematerials,pagemeta}) {
     const verdensmal = pagematerials.find((mat)=>mat.key==="verdensmal");
+    const index= pagemeta;
 
     return (
         <div>
             <Head>
-                <title>Boligformidlingen</title>
+                <title>{index?.title}</title>
+                <meta name={"description"} content={index?.description}/>
+                <meta name={"keywords"} content={index?.keywords}/>
                 <link rel="icon" href="/favicon.ico"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
                 <link rel="stylesheet" href={"/fonts/font-awesome.min.css"}/>
@@ -63,14 +66,14 @@ function Index({properties,pagematerials}) {
                                     <h3>{property.Title}</h3>
                                     <div>
                                         <img style={{width: "100%", height: "100%"}}
-                                             src={getStrapiMedia(property.thumbnail.formats.small)}/>
+                                             src={getStrapiMedia(property.thumbnail.formats.small)} alt={property.Title}/>
                                     </div>
                                     <div style={{marginTop: 24, marginBottom: 24}}>
                                         {property.showsubpage ?
                                             property.rented ?
-                                                <a href={"/home/" + property.id} className={"ringbutton"}>Rented</a>
+                                                <a href={"/home/" + property.id + "/" + property.Title.replace(/\s/g, '')} className={"ringbutton"}>Rented</a>
                                                 :
-                                                <a href={"/home/" + property.id} className={"ringbutton"}>More Info</a>
+                                                <a href={"/home/" + property.id + "/" + property.Title.replace(/\s/g, '')} className={"ringbutton"}>More Info</a>
                                             :
                                             <a href={"/contact/"} className="ringbutton">Contact us</a>
                                         }
@@ -92,10 +95,12 @@ function Index({properties,pagematerials}) {
 export async function getServerSideProps(){
     let propertytask = fetchAPI("properties");
     let pagetask = fetchAPI("pagematerials");
+    let pagemetatask = fetchAPI("pagemetas?key=index");
     let properties=  await propertytask;
     let pagematerials = await pagetask;
+    let pagemeta = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials}}
+    return {props:{properties:properties, pagematerials:pagematerials, pagemeta:pagemeta[0]}}
 }
 
 export default Index;
