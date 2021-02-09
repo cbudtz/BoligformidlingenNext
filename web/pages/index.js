@@ -7,6 +7,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import MainJumbo from "../components/MainJumbo";
 import ReactMarkdown from 'react-markdown';
 import {getStrapiMedia} from "../lib/media";
+import Footer from "../components/Footer";
 
 
 function Index({properties,pagematerials}) {
@@ -18,6 +19,7 @@ function Index({properties,pagematerials}) {
                 <title>Boligformidlingen</title>
                 <link rel="icon" href="/favicon.ico"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
+                <link rel="stylesheet" href={"/fonts/font-awesome.min.css"}/>
                 <script src={"https://www.googletagmanager.com/gtag/js?id=UA-137703064-1"}/>
                 <script src={"/linkedin.js"}/>
                 <script src={"/fbpix.js"}/>
@@ -56,23 +58,32 @@ function Index({properties,pagematerials}) {
                 <hr/>
                 <Container>
                     <Row>
-                        {properties.map(property=>
-                            <Col md={4}>
-                                <h3>{property.Title}</h3>
-                                <div>
-                                    <img style={{width:"100%",height:"100%"}} src={getStrapiMedia(property.thumbnail.formats.small)}/>
-                                </div>
-                                <div style={{marginTop:24,marginBottom:24}}>
-                                    <a href={"/home/"+property.id} className={"ringbutton"}>More Info</a>
-                                </div>
-                            </Col>
+                        {properties.map(property=> { if (property.visible) return (
+                                <Col md={4}>
+                                    <h3>{property.Title}</h3>
+                                    <div>
+                                        <img style={{width: "100%", height: "100%"}}
+                                             src={getStrapiMedia(property.thumbnail.formats.small)}/>
+                                    </div>
+                                    <div style={{marginTop: 24, marginBottom: 24}}>
+                                        {property.showsubpage ?
+                                            property.rented ?
+                                                <a href={"/home/" + property.id} className={"ringbutton"}>Rented</a>
+                                                :
+                                                <a href={"/home/" + property.id} className={"ringbutton"}>More Info</a>
+                                            :
+                                            <a href={"/contact/"} className="ringbutton">Contact us</a>
+                                        }
+                                    </div>
+                                </Col>)
+                            }
                         )}
 
                     </Row>
                 </Container>
-
-
+                <Footer pagematerials={pagematerials}/>
             </main>
+
 
         </div>
     )

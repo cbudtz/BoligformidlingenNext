@@ -28,11 +28,11 @@ function Contact({properties}) {
                         validate={values =>  {
                             const errors = {};
                             if (!values.email) {
-                                errors.email = 'Påkrævet';
+                                errors.email = 'Required';
                             } else if (
                                 !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'ugyldig email adresse.';
+                                errors.email = 'Invalid Email address';
                             }
                             return errors;
                         }}
@@ -66,7 +66,7 @@ function Contact({properties}) {
                         )=>(
                             <>
                                 <Form.Group>
-                                    <Form.Label>Din email adresse</Form.Label>
+                                    <Form.Label>Your email address</Form.Label>
                                     <Form.Control type={"email"} name={"email"}
                                                   onChange={handleChange}
                                                   onBlur={handleBlur}
@@ -77,7 +77,7 @@ function Contact({properties}) {
                                                   <Form.Control.Feedback type={"invalid"}>{errors.email}</Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Label>Din besked</Form.Label>
+                                    <Form.Label>Your message</Form.Label>
                                     <Form.Control type={"textarea"} name={"text"}
                                                   onChange={handleChange}
                                                   onBlur={handleBlur}
@@ -87,10 +87,10 @@ function Contact({properties}) {
                                     />
                                 </Form.Group>
                                 <Button disabled={isSubmitting} variant={"primary"} onClick={handleSubmit}>
-                                    Send besked
+                                    Send Message
                                 </Button>
                                 <hr/>
-                                {submitted && <h5>Tak for din henvendelse - Vi vil besvare den hurtigst muligt</h5>}
+                                {submitted && <h5>Thank you for your inquiry, we will return yo you shortly. </h5>}
                             </>
                         )}
 
