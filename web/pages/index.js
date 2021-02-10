@@ -37,7 +37,7 @@ function Index({properties,pagematerials,pagemeta}) {
                     <p>Vi giver vores professionelle vurdering af, hvor meget du kan forvente at udleje dit hjem for.</p>
                     <p>Hos Boligformidlingen kender vi lejerne og ved, hvad der tæller. Book tid i dag - det er gratis og helt
                         uforpligtende.</p>
-                    <h3><a href={"/book"}>Book Tid</a></h3>
+                    <h3><a href={"/contact"}>Book Tid</a></h3>
                 </MainJumbo>
                 <Container>
                     <hr/>

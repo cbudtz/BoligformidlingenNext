@@ -27,9 +27,10 @@ function Contact({properties,pagemeta}) {
             <main>
                 <TopBar properties={properties}/>
                 <Container>
+                    <hr/>
                     <h3>Feel free to contact us</h3>
                     <Formik
-                        initialValues={{email:"", text:""}}
+                        initialValues={{email:"", text:"",phone:""}}
                         validate={values =>  {
                             const errors = {};
                             if (!values.email) {
@@ -82,6 +83,17 @@ function Contact({properties,pagemeta}) {
                                                   <Form.Control.Feedback type={"invalid"}>{errors.email}</Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group>
+                                    <Form.Label>Your phonenumber</Form.Label>
+                                    <Form.Control type={"phone"} name={"phone"}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur}
+                                                  value={values.phone}
+                                                  isValid={touched.phone && !errors.phone}
+                                                  isInvalid={touched.phone &&!!errors.phone}
+                                    />
+                                                  <Form.Control.Feedback type={"invalid"}>{errors.phone}</Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group>
                                     <Form.Label>Your message</Form.Label>
                                     <Form.Control type={"textarea"} name={"text"}
                                                   onChange={handleChange}
@@ -95,7 +107,7 @@ function Contact({properties,pagemeta}) {
                                     Send Message
                                 </Button>
                                 <hr/>
-                                {submitted && <h5>Thank you for your inquiry, we will return yo you shortly. </h5>}
+                                {submitted && <h5>Thank you for your inquiry, we will return to you shortly. </h5>}
                             </>
                         )}
 
