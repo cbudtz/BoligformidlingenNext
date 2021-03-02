@@ -64,8 +64,8 @@ function Index({properties,pagematerials,pagemeta}) {
                         {properties.map(property=> { if (property.visible) return (
                                 <Col md={4} key={property.id}>
                                     <h3>{property.Title}</h3>
-                                    <div>
-                                        <img style={{width: "100%", height: "100%"}}
+                                    <div style={{width:"100", paddingBottom:"66%",margin:"1em auto",overflow:"hidden",position:"relative"}}>
+                                        <img style={{width: "100%", position:"absolute"}}
                                              src={getStrapiMedia(property.thumbnail.formats.small)} alt={property.Title}/>
                                     </div>
                                     <div style={{marginTop: 24, marginBottom: 24}}>
