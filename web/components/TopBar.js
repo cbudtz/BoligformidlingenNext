@@ -18,7 +18,7 @@ function TopBar({properties}){
             <Nav >
                 <NavDropdown title={"Homes for Rent"}>
                     {properties?.map((property)=> {
-                        if (property.visible) return (
+                        if (property.visible && !property.rented) return (
                             <NavDropdown.Item eventkey={property.id} key={property.id} href={"/home/" + property.id}
                                               active={router.pathname === "/home/" + property.id}>
                                 {property.Title}
