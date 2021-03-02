@@ -93,7 +93,7 @@ function Index({properties,pagematerials,pagemeta}) {
 }
 
 export async function getServerSideProps(){
-    let propertytask = fetchAPI("properties");
+    let propertytask = fetchAPI("properties?_sort=order:ASC");
     let pagetask = fetchAPI("pagematerials");
     let pagemetatask = fetchAPI("pagemetas?key=index");
     let properties=  await propertytask;
