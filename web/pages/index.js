@@ -75,7 +75,10 @@ function Index({properties,pagematerials,pagemeta}) {
                                                 :
                                                 <a href={"/home/" + property.id + "/" + property.Title.replace(/\s/g, '')} className={"ringbutton"}>More Info</a>
                                             :
-                                            <a href={"/contact/"} className="ringbutton">Contact us</a>
+                                            property.rented ?
+                                                <span className="ringbutton" >Rented</span>
+                                                :
+                                                <a href={"/contact/"} className="ringbutton">Contact us</a>
                                         }
                                     </div>
                                 </Col>)
