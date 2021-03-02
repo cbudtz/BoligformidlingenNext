@@ -29,9 +29,9 @@ function Home({property, properties}) {
 
                                     <Carousel.Item key={image.id}>
                                         <img style={{width:"100%", height:"40%"}} src={getStrapiMedia(image)}
-                                             srcSet={`${getStrapiMedia(image.formats.small)} 750w, 
-                                ${getStrapiMedia(image.formats.medium)} 1000w, 
-                                ${getStrapiMedia(image.formats.large)} 1500w`}
+                                //              srcSet={`${getStrapiMedia(image.formats.small)} 750w,
+                                // ${getStrapiMedia(image.formats.medium)} 1000w,
+                                // ${getStrapiMedia(image.formats.large)} 1500w`}
                                              alt={image.name}
                                         />
 
