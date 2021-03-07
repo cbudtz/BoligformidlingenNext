@@ -126,7 +126,7 @@ export async function getServerSideProps(context){
     let propertiestask =  fetchAPI("properties");
     let pagemetatask =  fetchAPI("pagemetas?key=contact");
     const pagemeta = await pagemetatask
-    return {props:{properties:await propertiestask, pagemeta: pagemeta[0]}}
+    return {props:{properties:await propertiestask, pagemeta: pagemeta && pagemeta[0]}}
 }
 
 export default Contact;

@@ -29,7 +29,7 @@ function Articles({properties, articles,pagemeta}) {
                 <TopBar properties={properties}/>
 
                 <Container>
-                    {articles.map((article)=>
+                    {articles?.map((article)=>
                         <Row style={{margin:"2em"}} key={article.id}>
                             <Col xs={12} md={4}>
                                 <img style={{width:"100%"}} src={getStrapiMedia(article.image)}></img>

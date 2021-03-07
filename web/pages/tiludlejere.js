@@ -8,10 +8,10 @@ import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
 
 function Tiludlejere({properties, pagematerials,pagemeta}) {
-    const tiludlejere = pagematerials.find((mat)=>mat.key==="tiludlejere");
-    const tiludlejere2 = pagematerials.find((mat)=>mat.key==="tiludlejere2");
-    const tiludlejere3 = pagematerials.find((mat)=>mat.key==="tiludlejere3");
-    const tiludlejere4 = pagematerials.find((mat)=>mat.key==="tiludlejere4");
+    const tiludlejere = pagematerials?.find((mat)=>mat.key==="tiludlejere");
+    const tiludlejere2 = pagematerials?.find((mat)=>mat.key==="tiludlejere2");
+    const tiludlejere3 = pagematerials?.find((mat)=>mat.key==="tiludlejere3");
+    const tiludlejere4 = pagematerials?.find((mat)=>mat.key==="tiludlejere4");
 
     return (
         <div>
@@ -44,7 +44,7 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
                     <Row>
                         <Col style={{textAlign:"center"}}>
                             <ReactMarkdown>
-                                {tiludlejere.text}
+                                {tiludlejere?.text}
                             </ReactMarkdown>
                         </Col>
                     </Row>

@@ -8,10 +8,10 @@ import ReactMarkdown from "react-markdown";
 import Footer from "../components/Footer";
 
 function About({properties, pagematerials, pagemeta}) {
-    const pagematerial = pagematerials.find((mat)=>mat.key==="about")
-    const pagematerial2 = pagematerials.find((mat)=>mat.key==="about2")
-    const arne = pagematerials.find((mat)=>mat.key==="arne")
-    const sara = pagematerials.find((mat)=>mat.key==="sara")
+    const pagematerial = pagematerials?.find((mat)=>mat.key==="about")
+    const pagematerial2 = pagematerials?.find((mat)=>mat.key==="about2")
+    const arne = pagematerials?.find((mat)=>mat.key==="arne")
+    const sara = pagematerials?.find((mat)=>mat.key==="sara")
     return (
         <>
             <Head>
@@ -80,7 +80,7 @@ export async function getServerSideProps(context){
     let pagematerials = await pagetask;
     let pagemetas = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials,pagemeta:pagemetas[0]}}
+    return {props:{properties:properties, pagematerials:pagematerials,pagemeta: pagemetas && pagemetas[0]}}
 }
 
 export default About;
