@@ -7,7 +7,8 @@ function TopBar({properties}){
     let router= useRouter();
     const pages = [{title:"About Us", path:"/about"},
         {title:"Contact",path: "/contact"},
-        {title:"Til udlejere",path:"/tiludlejere"}
+        {title:"Til udlejere",path:"/tiludlejere"},
+        {title:"Articles",path:"/articles"}
     ]
     return  (<Navbar sticky={"top"} expand={"md"} bg={"white"}>
         <Navbar.Brand href={"/"}>

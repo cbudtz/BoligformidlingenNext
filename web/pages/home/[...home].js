@@ -10,7 +10,7 @@ function Home({property, properties}) {
     return (
         <div>
             <Head>
-                <title>Boligformidlingen - {property.title}</title>
+                <title>Boligformidlingen - {property.Title}</title>
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
                 <script src={"https://www.googletagmanager.com/gtag/js?id=UA-137703064-1"}/>
