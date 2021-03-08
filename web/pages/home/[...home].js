@@ -24,11 +24,11 @@ function Home({property, properties}) {
                 <Container>
                     <Row>
                         <Col md={8}>
-                            <Carousel>
+                            <Carousel style={{height:"100%"}}>
                                 {property.images.map((image)=>
 
                                     <Carousel.Item key={image.id}>
-                                        <img style={{width:"100%", height:"40%"}} src={getStrapiMedia(image)}
+                                        <img style={{maxWidth:"100%", maxHeight:"100%"}} src={getStrapiMedia(image)}
                                 //              srcSet={`${getStrapiMedia(image.formats.small)} 750w,
                                 // ${getStrapiMedia(image.formats.medium)} 1000w,
                                 // ${getStrapiMedia(image.formats.large)} 1500w`}
