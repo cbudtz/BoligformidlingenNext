@@ -1,13 +1,15 @@
 import Head from 'next/head'
-import {fetchAPI} from "../lib/api";
+import {fetchAPI, getStrapiURL} from "../lib/api";
 import React from "react";
 import {Row, Col, Jumbotron, Container} from "react-bootstrap";
 import TopBar from "../components/TopBar";
 import ReactMarkdown from "react-markdown";
 import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
+import MarkDown from "../components/MarkDown";
 
 function Articles({properties, articles,pagemeta}) {
+    console.log(articles)
 
 
     return (
@@ -29,21 +31,23 @@ function Articles({properties, articles,pagemeta}) {
                 <TopBar properties={properties}/>
 
                 <Container>
-                    {articles?.map((article)=>
-                        <Row style={{margin:"2em"}} key={article.id}>
-                            <Col xs={12} md={4}>
-                                <img style={{width:"100%"}} src={getStrapiMedia(article.image)}></img>
+                    {articles?.map((article)=>{
+                        return(
+                            <Row style={{margin: "2em"}} key={article.id}>
+                                <Col xs={12} md={4}>
+                                    <img style={{width: "100%"}} src={getStrapiMedia(article.image)}></img>
 
-                            </Col>
-                            <Col xs={12} md={8}>
-                                <div style={{margin:"1em"}}>
-                                    <ReactMarkdown>
-                                    {article.text}
-                                    </ReactMarkdown>
-                                </div>
-                            </Col>
+                                </Col>
+                                <Col xs={12} md={8}>
+                                    <div style={{margin: "1em"}}>
+                                        <MarkDown>
+                                            {article.text}
+                                        </MarkDown>
+                                    </div>
+                                </Col>
 
-                        </Row>
+                            </Row>
+                        )}
 
                     )}
 
