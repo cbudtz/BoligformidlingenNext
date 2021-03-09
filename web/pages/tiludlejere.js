@@ -65,7 +65,7 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
                             </ReactMarkdown>
                         </Col>
                         <Col md={4}>
-                            <img src={getStrapiMedia(tiludlejere3?.images[0].formats.small)}/>
+                            <img style={{maxWidth:"100%"}} src={getStrapiMedia(tiludlejere3?.images[0].formats.small)}/>
 
                         </Col>
                     </Row>
@@ -77,7 +77,7 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
                         </Col>
                     </Row>
                     <Row>
-                        <img src={getStrapiMedia(tiludlejere4?.images[0])}/>
+                        <img style={{maxWidth:"100%"}} src={getStrapiMedia(tiludlejere4?.images[0])}/>
                     </Row>
                 </Container>
             </main>
