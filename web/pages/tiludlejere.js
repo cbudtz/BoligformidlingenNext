@@ -44,9 +44,9 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
                 <Container>
                     <Row>
                         <Col style={{textAlign:"center"}}>
-                            {/*<MarkDown>*/}
-                            {/*    {tiludlejere?.text}*/}
-                            {/*</MarkDown>*/}
+                            <MarkDown>
+                                {tiludlejere?.text}
+                            </MarkDown>
                         </Col>
                     </Row>
                     <Row style={{padding: 20}}/>
