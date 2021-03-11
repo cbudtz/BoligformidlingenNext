@@ -62,7 +62,7 @@ function Index({properties,pagematerials,pagemeta}) {
                 <Container>
                     <Row>
                         {properties.map(property=> { if (property.visible) return (
-                                <Col md={4} key={property.id}>
+                                <Col md={4} sm={6} key={property.id}>
                                     <h3>{property.Title}</h3>
                                     <div style={{width:"100", paddingBottom:"66%",margin:"1em auto",overflow:"hidden",position:"relative"}}>
                                         <img style={{width: "100%", position:"absolute"}}

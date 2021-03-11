@@ -24,7 +24,7 @@ function Home({property, properties}) {
                 <Container>
                     <Row>
                         <Col md={8}>
-                            <Carousel style={{height:"100%"}}>
+                            <Carousel>
                                 {property.images.map((image)=>
 
                                     <Carousel.Item key={image.id}>
