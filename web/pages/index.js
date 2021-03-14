@@ -66,7 +66,7 @@ function Index({properties,pagematerials,pagemeta}) {
                                     <h3 style={{minHeight:60}}>{property.Title}</h3>
                                     <div style={{width:"100", paddingBottom:"66%",margin:"1em auto",overflow:"hidden",position:"relative"}}>
                                         <img style={{width: "100%", position:"absolute"}}
-                                             src={property.thumbnail && getStrapiMedia(property.thumbnail.formats.small)} alt={property.Title}/>
+                                             src={property.thumbnail && (property.thumbnail.formats.small? getStrapiMedia(property.thumbnail.formats.small):getStrapiMedia(property.thumbnail))} alt={property.Title}/>
                                     </div>
                                     <div style={{marginTop: 24, marginBottom: 24}}>
                                         {property.showsubpage ?
