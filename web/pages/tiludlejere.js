@@ -80,7 +80,6 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
                             }
                         </Col>
                     </Row>
-                    <Row><Col><hr/></Col></Row>
                     <Row>
                         <img style={{maxWidth:"100%"}} src={getStrapiMedia(tiludlejere4?.images[0])}/>
                     </Row>

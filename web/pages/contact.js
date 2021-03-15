@@ -5,8 +5,10 @@ import {Container, Form,Button} from "react-bootstrap";
 import TopBar from "../components/TopBar";
 import {Formik} from "formik";
 import Footer from "../components/Footer";
+import Jumbo from "../components/Jumbo";
+import PageContent from "../components/PageContent";
 
-function Contact({properties,pagemeta}) {
+function Contact({properties,pagemeta, pagecontent}) {
     const [submitted, setSubmitted] = useState(false)
     return (
         <div>
@@ -26,18 +28,16 @@ function Contact({properties,pagemeta}) {
 
             <main>
                 <TopBar properties={properties}/>
+                <PageContent contents={pagecontent?.contents}/>
                 <Container>
-                    <hr/>
-                    <h3>Feel free to contact us</h3>
+
                     <Formik
                         initialValues={{email:"", text:"",phone:""}}
                         validate={values =>  {
                             const errors = {};
                             if (!values.email) {
                                 errors.email = 'Required';
-                            } else if (
-                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                            ) {
+                            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                                 errors.email = 'Invalid Email address';
                             }
                             return errors;
@@ -125,8 +125,10 @@ function Contact({properties,pagemeta}) {
 export async function getServerSideProps(context){
     let propertiestask =  fetchAPI("properties");
     let pagemetatask =  fetchAPI("pagemetas?key=contact");
+    let contactmaterialtask = fetchAPI("contact");
+    const pagecontent = await contactmaterialtask;
     const pagemeta = await pagemetatask
-    return {props:{properties:await propertiestask, pagemeta: pagemeta && pagemeta[0]}}
+    return {props:{properties:await propertiestask, pagemeta: pagemeta && pagemeta[0], pagecontent:pagecontent}}
 }
 
 export default Contact;

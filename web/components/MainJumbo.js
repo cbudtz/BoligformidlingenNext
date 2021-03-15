@@ -13,7 +13,7 @@ export default function MainJumbo(props) {
     >
         <div style={{
             backgroundColor: "rgba(255,255,255,0.90)",
-            width: 380, height: 380, padding: 45, margin:"0 auto",
+            width: 360, height: 360, padding:"25px 45px 25px 45px", margin:"0 auto",
             borderRadius: 999, position: "relative",
             textAlign: "center"
         }}>

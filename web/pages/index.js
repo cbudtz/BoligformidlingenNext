@@ -8,11 +8,20 @@ import MainJumbo from "../components/MainJumbo";
 import ReactMarkdown from 'react-markdown';
 import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
+import PageContent from "../components/PageContent";
 
 
-function Index({properties,pagematerials,pagemeta}) {
-    const verdensmal = pagematerials.find((mat)=>mat.key==="verdensmal");
+function Index({properties,pagematerials,pagemeta, pagecontent}) {
+    const verdensmal = pagematerials?.find((mat)=>mat.key==="verdensmal");
     const index= pagemeta;
+
+    function formatTitle(Title) {
+        const titleArray = Title.split(",")
+        return <span>
+            {titleArray[0]}{titleArray[1] && ","} <br/>
+            {titleArray[1]}
+        </span>
+    }
 
     return (
         <div>
@@ -39,31 +48,14 @@ function Index({properties,pagematerials,pagemeta}) {
                         uforpligtende.</p>
                     <h3><a href={"/contact"}>Book Tid</a></h3>
                 </MainJumbo>
-                <Container>
-                    <hr/>
-                    <Row>
-                        <Col md={6} lg={4}>
-                            <img width={"100%"} alt="Verdensmål" src={getStrapiMedia(verdensmal.images[0].formats.small)}/>
-                        </Col>
-                        <Col md={6}>
-                            <ReactMarkdown children={verdensmal.text}/>
-                        </Col>
-                        <Col md={6} lg={4}>
-                            {verdensmal.images[1] &&
-                            <img width={"66%"} src={getStrapiMedia(verdensmal.images[1].formats.small)}/>
-                            }
-                            {verdensmal.images[2] &&
-                            <img width={"33%"} src={getStrapiMedia(verdensmal.images[2].formats.small)}/>
-                            }
-                        </Col>
-                    </Row>
-                </Container>
+                <PageContent contents={pagecontent.pagecontent}/>
+
                 <hr/>
                 <Container>
                     <Row>
-                        {properties.map(property=> { if (property.visible) return (
+                        {properties?.map(property=> { if (property.visible) return (
                                 <Col lg={4} md={6} sm={12} key={property.id}>
-                                    <h3 style={{minHeight:60}}>{property.Title}</h3>
+                                    <h3 style={{minHeight:60}}>{formatTitle(property.Title)}</h3>
                                     <div style={{width:"100", paddingBottom:"66%",margin:"1em auto",overflow:"hidden",position:"relative"}}>
                                         <img style={{width: "100%", position:"absolute"}}
                                              src={property.thumbnail && (property.thumbnail.formats.small? getStrapiMedia(property.thumbnail.formats.small):getStrapiMedia(property.thumbnail))} alt={property.Title}/>
@@ -98,12 +90,13 @@ function Index({properties,pagematerials,pagemeta}) {
 export async function getServerSideProps(){
     let propertytask = fetchAPI("properties?_sort=order:ASC");
     let pagetask = fetchAPI("pagematerials");
+    let pagecontenttask = fetchAPI("frontpage");
     let pagemetatask = fetchAPI("pagemetas?key=index");
     let properties=  await propertytask;
     let pagematerials = await pagetask;
     let pagemeta = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials, pagemeta:pagemeta[0]}}
+    return {props:{properties:properties, pagematerials:pagematerials, pagemeta: pagemeta && pagemeta[0], pagecontent:await pagecontenttask}}
 }
 
 export default Index;
