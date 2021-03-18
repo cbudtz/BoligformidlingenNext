@@ -34,8 +34,7 @@ function Index({properties,pagematerials,pagemeta, pagecontent}) {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
                 <link rel="stylesheet" href={"/fonts/font-awesome.min.css"}/>
                 <script src={"https://www.googletagmanager.com/gtag/js?id=UA-137703064-1"}/>
-                <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js"
-    data-cbid="cc09b387-dd74-42a2-90ad-ddef37e1e59b" data-blockingmode="auto" type="text/javascript"/>
+                <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="cc09b387-dd74-42a2-90ad-ddef37e1e59b" data-blockingmode="auto" type="text/javascript"></script>
                 <script src={"/linkedin.js"}/>
                 <script src={"/fbpix.js"}/>
                 <script src={"/googleAnalytics.js"}/>
@@ -44,7 +43,9 @@ function Index({properties,pagematerials,pagemeta, pagecontent}) {
             </Head>
 
             <main>
-                <script id="CookieDeclaration" src="https://consent.cookiebot.com/cc09b387-dd74-42a2-90ad-ddef37e1e59b/cd.js" type="text/javascript" async/>
+                <div id={"cookiemonster"}>
+                <script id="CookieDeclaration" src="https://consent.cookiebot.com/cc09b387-dd74-42a2-90ad-ddef37e1e59b/cd.js" type="text/javascript" async></script>
+                </div>
                 <TopBar properties={properties}/>
                 <MainJumbo>
                     <h3>Gratis og uforpligtende vurdering</h3>
