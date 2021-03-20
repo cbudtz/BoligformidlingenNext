@@ -13,7 +13,6 @@ import CookieHandler from "../components/CookieHandler";
 
 
 function Index({properties,pagematerials,pagemeta, pagecontent}) {
-    const verdensmal = pagematerials?.find((mat)=>mat.key==="verdensmal");
     const index= pagemeta;
 
     function formatTitle(Title) {
@@ -26,6 +25,7 @@ function Index({properties,pagematerials,pagemeta, pagecontent}) {
 
     return (
         <div>
+
             <Head>
                 <title>{index?.title}</title>
                 <meta name={"description"} content={index?.description}/>
@@ -87,7 +87,7 @@ function Index({properties,pagematerials,pagemeta, pagecontent}) {
                 <CookieHandler/>
                 <Footer pagematerials={pagematerials}/>
                 <div id={"cookiemonster"}>
-                    <script id="CookieDeclaration" src="https://consent.cookiebot.com/cc09b387-dd74-42a2-90ad-ddef37e1e59b/cd.js" type="text/javascript" async></script>
+                    <script id="CookieDeclaration" src="https://consent.cookiebot.com/cc09b387-dd74-42a2-90ad-ddef37e1e59b/cd.js" type="text/javascript" async/>
                 </div>
             </main>
 
