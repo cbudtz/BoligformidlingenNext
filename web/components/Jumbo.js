@@ -9,10 +9,10 @@ export default function Jumbo({imageurl: image, text}){
     const  [windowWidth, setWindowWidth] = useState(2000)
     useWindow(setWindowWidth);
     image = resolveImage(windowWidth, image);
-    const smallwindow = windowWidth<640;
+    const jumboheight = windowWidth<640 ? (windowWidth<400?300:400):600;
     return(
     <Jumbotron fluid style={{
-        minHeight: smallwindow ? 400:600,
+        minHeight: jumboheight,
         backgroundImage: "url('"+ getStrapiMedia(image)+ "')",
         backgroundRepeat: "space",
         backgroundPosition: "center",
