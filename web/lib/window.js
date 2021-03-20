@@ -2,6 +2,7 @@ import {useEffect} from "react";
 
 export function useWindow(setWindowWidth) {
     useEffect(() => {
+        if (window) {setWindowWidth(window.innerWidth);}
         const handleResize = () => setWindowWidth(window.innerWidth)
         window && window.addEventListener('resize', handleResize);
         return () => {
