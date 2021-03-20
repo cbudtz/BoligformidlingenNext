@@ -12,7 +12,7 @@ export default function W1ImagesW2Text({element}){
             <Col lg={4} md={6}>
                 {element?.images?.map((image,key)=>{
                     const resimage = resolveImage(windowWidth,image.image)
-                    return <img key={key} width={image.width +"%"} src={getStrapiMedia(resimage)} alt={image.name}/>
+                    return <img key={key} width={image.width +"%"} src={getStrapiMedia(resimage)} alt={resimage.name}/>
                 })}
             </Col>
             <Col lg={8} md={6}><MarkDown>{element?.text}</MarkDown></Col>
