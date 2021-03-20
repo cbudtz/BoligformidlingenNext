@@ -1,8 +1,9 @@
 import Jumbo from "./Jumbo";
 import React from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import MarkDown from "./MarkDown";
-import {getStrapiMedia} from "../lib/media";
+import W1ImgW2Text from "./W1ImgW2Text";
+import W1ImagesW2Text from "./W1ImagesW2Text";
 
 export default function PageContent({contents: array}){
     if (!array?.map) {console.log(array); return <></>}
@@ -15,31 +16,9 @@ export default function PageContent({contents: array}){
                 } else if (componentType==="fullwidthtext") {
                     return <Container key={key}><Row><Col><MarkDown>{element.text}</MarkDown></Col></Row></Container>
                 } else if (componentType==="1wideimage2widetext"){
-                    if (element?.imageplace==="right"){
-                        return <Container key={key}><Row><Col></Col></Row></Container>
-                    } else {
-                        return <Container key={key}>
-                            <Row>
-                                <Col lg={4} md={6}>
-                                    <img width={"100%"} alt="image" src={getStrapiMedia(element?.image)}/>
-                                </Col>
-                                <Col lg={8} md={6}><MarkDown>{element?.text}</MarkDown></Col>
-                            </Row>
-                        </Container>
-                    }
+                    return <W1ImgW2Text key={key} element={element}/>
                 } else if (componentType==="1w-images2w-text"){
-                    return <Container key={key}>
-                        <Row>
-                            <Col lg={4} md={6}>
-
-                                {element?.images?.map((image)=>{
-                                    return <img width={image.width +"%"} src={getStrapiMedia(image.image)}/>
-                                })}
-                            </Col>
-                            <Col lg={8} md={6}><MarkDown>{element?.text}</MarkDown></Col>
-                        </Row>
-
-                    </Container>
+                    return <W1ImagesW2Text key={key} element={element}/>
                 }
             })}
         </>

@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 
 
 function Footer({pagematerials}){
-    let router= useRouter();
+    // let router= useRouter();
     const footerText = pagematerials?.find((page)=>page.key==="footertext")
     const socialicon = {fontSize:29,border:1,borderStyle:"solid",borderColor:"#ccc", borderRadius:"50%",
         display:"inline-block",width:"40px",height:"40px", marginLeft:"20px", lineHeight:"40px",textAlign:"center"};
@@ -13,7 +13,7 @@ function Footer({pagematerials}){
         <hr/>
         <Row>
             <Col md={4} >
-                <img width={210} height={63} src={"/images/boligformidlingen.png"}/>
+                <img width={210} height={63} src={"/images/boligformidlingen.png"} alt={"Boligformidlingen"}/>
                 <p>
                     Holmebjerg 21<br/>
                     DK - 2950 Vedbæk<br/>
