@@ -6,6 +6,7 @@ import TopBar from "../components/TopBar";
 import {getStrapiMedia} from "../lib/media";
 import ReactMarkdown from "react-markdown";
 import Footer from "../components/Footer";
+import Jumbo from "../components/Jumbo";
 
 function About({properties, pagematerials, pagemeta}) {
     const pagematerial = pagematerials?.find((mat)=>mat.key==="about")
@@ -30,13 +31,7 @@ function About({properties, pagematerials, pagemeta}) {
             <main>
                 <TopBar properties={properties}/>
                 <Container fluid>
-                    <Jumbotron fluid style={{
-                        minHeight: 600,
-                        backgroundImage: "url('" + getStrapiMedia(pagematerial?.images[0]) +   "')",
-                        backgroundRepeat: "space",
-                        backgroundPosition: "center",
-                        backgroundSize: "cover"
-                    }}/>
+                    <Jumbo imageurl={pagematerial?.images[0]} />
                 </Container>
                 <Container>
                     <Row><Col>
