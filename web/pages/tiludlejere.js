@@ -7,8 +7,9 @@ import ReactMarkdown from "react-markdown";
 import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
 import MarkDown from "../components/MarkDown";
+import PageContent from "../components/PageContent";
 
-function Tiludlejere({properties, pagematerials,pagemeta}) {
+function Tiludlejere({properties, pagematerials,pagemeta,pagecontent}) {
     const tiludlejere = pagematerials?.find((mat)=>mat.key==="tiludlejere");
     const tiludlejere2 = pagematerials?.find((mat)=>mat.key==="tiludlejere2");
     const tiludlejere3 = pagematerials?.find((mat)=>mat.key==="tiludlejere3");
@@ -32,59 +33,8 @@ function Tiludlejere({properties, pagematerials,pagemeta}) {
 
             <main>
                 <TopBar properties={properties}/>
-                <Container fluid>
-                    <Jumbotron fluid style={{
-                        minHeight: 600,
-                        backgroundImage: "url('" + getStrapiMedia(tiludlejere?.images[0]) + "')",
-                        backgroundRepeat: "space",
-                        backgroundPosition: "center",
-                        backgroundSize: "cover"
-                    }}/>
+                <PageContent contents={pagecontent?.content}/>
 
-                </Container>
-                <Container>
-                    <Row>
-                        <Col style={{textAlign:"center"}}>
-                            <MarkDown>
-                                {tiludlejere?.text}
-                            </MarkDown>
-                        </Col>
-                    </Row>
-                    <Row style={{padding: 20}}/>
-                    <Row>
-                        {tiludlejere2?.images.map((image, key)=>
-                            (<Col key={key} sm={4} style={{textAlign:"center"}}>
-                                <img style={{maxWidth:150,maxHeight:150, borderRadius:"50%"}} src={getStrapiMedia(image)}/>
-                                <h5><p>{tiludlejere2?.text.split(",")[key]}</p></h5>
-                            </Col>)
-
-                        )}
-                    </Row>
-                    <hr/>
-                    <Row><Col><h3 style={{textAlign:"center"}}>Har du eller kender du nogen med et godt hjem til vores gode udvalgte lejere?</h3></Col></Row>
-                    <Row>
-                        <Col md={4}><h6><b>Gratis og uforpligtende besigtelse og vurdering</b></h6></Col>
-                        <Col md={4}>
-                            <img style={{maxWidth:"100%"}} src={getStrapiMedia(tiludlejere3?.images[0].formats.small)}/>
-                            <h6 style={{textAlign:"center",marginTop:15}}><b>Arne Backlund & Sara Heiberg</b></h6>
-                            <h6><i style={{textAlign:"center"}}>- Skal vi også udleje dit hjem?</i></h6>
-                        </Col>
-                        <Col md={4}><h6><b>Udlejet eller gratis. Lige nu - frit tilsyn i udlejningsperioden</b></h6></Col>
-                    </Row>
-                    <Row><Col><hr/></Col></Row>
-                    <Row>
-                        <Col>
-                            { tiludlejere4 &&
-                                <MarkDown>
-                                    {tiludlejere4?.text}
-                                </MarkDown>
-                            }
-                        </Col>
-                    </Row>
-                    <Row>
-                        <img style={{maxWidth:"100%"}} src={getStrapiMedia(tiludlejere4?.images[0])}/>
-                    </Row>
-                </Container>
             </main>
             <Footer/>
 
@@ -96,12 +46,14 @@ export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
     let pagetask = fetchAPI("pagematerials");
     let pagemetatask = fetchAPI("pagemetas");
+    let tiludlejeretask = fetchAPI("tiludlejere");
     let properties=  await propertytask;
     let pagematerials = await pagetask;
     let pagemetas = await pagemetatask;
+    let pagecontent = await tiludlejeretask;
 
 
-    return {props:{properties:properties, pagematerials:pagematerials,pagemetas:pagemetas}}
+    return {props:{properties:properties, pagematerials:pagematerials,pagemetas:pagemetas,pagecontent:pagecontent}}
 }
 
 export default Tiludlejere;
