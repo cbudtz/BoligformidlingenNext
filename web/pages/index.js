@@ -96,7 +96,7 @@ function Index({properties,pagematerials,pagemeta, pagecontent}) {
     )
 }
 
-export async function getServerSideProps(){
+export async function getStaticProps(){
     let propertytask = fetchAPI("properties?_sort=order:ASC");
     let pagetask = fetchAPI("pagematerials");
     let pagecontenttask = fetchAPI("frontpage");
@@ -105,7 +105,7 @@ export async function getServerSideProps(){
     let pagematerials = await pagetask;
     let pagemeta = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials, pagemeta: pagemeta && pagemeta[0], pagecontent:await pagecontenttask}}
+    return {props:{properties:properties, pagematerials:pagematerials, pagemeta: pagemeta && pagemeta[0], pagecontent:await pagecontenttask},revalidate:10}
 }
 
 export default Index;
