@@ -10,10 +10,6 @@ import MarkDown from "../components/MarkDown";
 import PageContent from "../components/PageContent";
 
 function Tiludlejere({properties, pagematerials,pagemeta,pagecontent}) {
-    const tiludlejere = pagematerials?.find((mat)=>mat.key==="tiludlejere");
-    const tiludlejere2 = pagematerials?.find((mat)=>mat.key==="tiludlejere2");
-    const tiludlejere3 = pagematerials?.find((mat)=>mat.key==="tiludlejere3");
-    const tiludlejere4 = pagematerials?.find((mat)=>mat.key==="tiludlejere4");
 
     return (
         <div>
@@ -44,11 +40,9 @@ function Tiludlejere({properties, pagematerials,pagemeta,pagecontent}) {
 
 export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
-    let pagetask = fetchAPI("pagematerials");
     let pagemetatask = fetchAPI("pagemetas");
     let tiludlejeretask = fetchAPI("tiludlejere");
     let properties=  await propertytask;
-    let pagematerials = await pagetask;
     let pagemetas = await pagemetatask;
     let pagecontent = await tiludlejeretask;
 
