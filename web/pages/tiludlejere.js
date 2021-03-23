@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import MarkDown from "../components/MarkDown";
 import PageContent from "../components/PageContent";
 
-function Tiludlejere({properties, pagematerials,pagemeta,pagecontent}) {
+function Tiludlejere({properties,pagemeta,pagecontent}) {
 
     return (
         <div>
@@ -47,7 +47,7 @@ export async function getServerSideProps(context){
     let pagecontent = await tiludlejeretask;
 
 
-    return {props:{properties:properties, pagematerials:pagematerials,pagemetas:pagemetas,pagecontent:pagecontent}}
+    return {props:{properties:properties,pagemetas:pagemetas,pagecontent:pagecontent}}
 }
 
 export default Tiludlejere;
