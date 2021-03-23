@@ -9,7 +9,6 @@ import CenteredCols3 from "./CenteredCols3";
 
 export default function PageContent({contents: array}){
     if (!array?.map) {console.log(array); return <></>}
-    console.log(array);
     return(
         <>
             {array?.map((element,key)=>{
