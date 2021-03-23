@@ -6,6 +6,7 @@ import W1ImgW2Text from "./W1ImgW2Text";
 import W1ImagesW2Text from "./W1ImagesW2Text";
 import RoundImagesWText from "./RoundImagesWText";
 import CenteredCols3 from "./CenteredCols3";
+import Cols2 from "./Cols2";
 
 export default function PageContent({contents: array}){
     if (!array?.map) {console.log(array); return <></>}
@@ -25,6 +26,8 @@ export default function PageContent({contents: array}){
                     return <RoundImagesWText key={key} element={element}/>
                 } else if (componentType==="3centered-cols"){
                     return <CenteredCols3 key={key} element={element} />
+                } else if (componentType==="2-cols"){
+                    return <Cols2 key={key} element={element}/>
                 }
             })}
         </>

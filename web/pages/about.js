@@ -7,12 +7,10 @@ import {getStrapiMedia} from "../lib/media";
 import ReactMarkdown from "react-markdown";
 import Footer from "../components/Footer";
 import Jumbo from "../components/Jumbo";
+import PageContent from "../components/PageContent";
 
-function About({properties, pagematerials, pagemeta}) {
-    const pagematerial = pagematerials?.find((mat)=>mat.key==="about")
-    const pagematerial2 = pagematerials?.find((mat)=>mat.key==="about2")
-    const arne = pagematerials?.find((mat)=>mat.key==="arne")
-    const sara = pagematerials?.find((mat)=>mat.key==="sara")
+function About({properties, pagematerials, pagemeta, pagecontent}) {
+
     return (
         <>
             <Head>
@@ -30,38 +28,8 @@ function About({properties, pagematerials, pagemeta}) {
             </Head>
             <main>
                 <TopBar properties={properties}/>
-                <Container fluid>
-                    <Jumbo imageurl={pagematerial?.images[0]} />
-                </Container>
-                <Container>
-                    <Row><Col>
-                        <ReactMarkdown>
-                            {pagematerial?.text}
-                        </ReactMarkdown>
+                <PageContent contents={pagecontent.content}/>
 
-                        {pagematerial2?.images.map(img=><img key={img.url} height={65} src={getStrapiMedia(img)} alt={img.url}/>
-                        )}
-                        <ReactMarkdown>
-                            {pagematerial2?.text}
-                        </ReactMarkdown>
-                    </Col></Row>
-                    <Row>
-                    <Col md={6}>
-                        {<img style={{maxWidth:"200px"}} alt={"arne"} src={getStrapiMedia(arne?.images[0])}/>}
-                        <ReactMarkdown>
-
-                        {arne?.text}
-                        </ReactMarkdown>
-                    </Col>
-                        <Col md={6}>
-                            {<img style={{maxWidth:"200px"}} src={getStrapiMedia(sara?.images[0])} alt={"sara"}/>}
-                            <ReactMarkdown>
-                                {sara?.text}
-                            </ReactMarkdown>
-
-                    </Col>
-                    </Row>
-                </Container>
             </main>
             <Footer/>
         </>
@@ -70,13 +38,12 @@ function About({properties, pagematerials, pagemeta}) {
 
 export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
-    let pagetask = fetchAPI("pagematerials");
     let pagemetatask = fetchAPI("pagemetas?key=about");
+    let aubouttask = fetchAPI("aboutus");
     let properties=  await propertytask;
-    let pagematerials = await pagetask;
     let pagemetas = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials,pagemeta: pagemetas && pagemetas[0]}}
+    return {props:{properties:properties, pagemeta: pagemetas && pagemetas[0], pagecontent:await aubouttask}}
 }
 
 export default About;
