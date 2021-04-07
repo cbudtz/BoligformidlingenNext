@@ -18,7 +18,7 @@ function Footer({pagematerials}){
                     Holmebjerg 21<br/>
                     DK - 2950 Vedbæk<br/>
                     +45 60931453<br/>
-                    <a href={"mailto:udlej@boligformidlingen.com"} rel="noopener">udlej@boligformidlingen@com</a>
+                    <a href={"mailto:udlej@boligformidlingen.com"} rel="noopener">udlej@boligformidlingen.com</a>
                 </p>
 
             </Col>
