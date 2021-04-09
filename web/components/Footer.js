@@ -10,7 +10,6 @@ function Footer({footer}){
     const socialicon = {fontSize:29,border:1,borderStyle:"solid",borderColor:"#ccc", borderRadius:"50%",
         display:"inline-block",width:"40px",height:"40px", marginLeft:"20px", lineHeight:"40px",textAlign:"center"};
     return  (<>
-        {JSON.stringify(footer)}
         <Container>
         <hr/>
         <Row>
