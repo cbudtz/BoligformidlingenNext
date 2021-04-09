@@ -65,11 +65,8 @@ export async function getServerSideProps(context){
     let articletask = fetchAPI("articles");
     let pagemetatask = fetchAPI("pagemetas");
     let footerTask = fetchAPI("footer");
-    let pagemeta = await pagemetatask;
-    let properties=  await propertytask;
-    let articles = await articletask;
 
-    return {props:{properties:properties, articles:articles,pagemeta:pagemeta, footer:await footerTask}}
+    return {props:{properties:await propertytask, articles:await articletask,pagemeta: await pagemetatask, footer:await footerTask}}
 }
 
 export default Articles;
