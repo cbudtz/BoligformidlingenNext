@@ -1,15 +1,11 @@
 import Head from 'next/head'
 import {fetchAPI} from "../lib/api";
 import React from "react";
-import {Row, Col, Jumbotron, Container} from "react-bootstrap";
 import TopBar from "../components/TopBar";
-import {getStrapiMedia} from "../lib/media";
-import ReactMarkdown from "react-markdown";
 import Footer from "../components/Footer";
-import Jumbo from "../components/Jumbo";
 import PageContent from "../components/PageContent";
 
-function About({properties, pagematerials, pagemeta, pagecontent}) {
+function About({properties, footer, pagemeta, pagecontent}) {
 
     return (
         <>
@@ -31,7 +27,7 @@ function About({properties, pagematerials, pagemeta, pagecontent}) {
                 <PageContent contents={pagecontent.content}/>
 
             </main>
-            <Footer/>
+            <Footer footer={footer}/>
         </>
     )
 }
@@ -39,11 +35,12 @@ function About({properties, pagematerials, pagemeta, pagecontent}) {
 export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
     let pagemetatask = fetchAPI("pagemetas?key=about");
+    let footerTask = fetchAPI("footer")
     let aubouttask = fetchAPI("aboutus");
     let properties=  await propertytask;
     let pagemetas = await pagemetatask;
 
-    return {props:{properties:properties, pagemeta: pagemetas && pagemetas[0], pagecontent:await aubouttask}}
+    return {props:{properties:properties, pagemeta: pagemetas && pagemetas[0], pagecontent:await aubouttask, footer: await footerTask}}
 }
 
 export default About;

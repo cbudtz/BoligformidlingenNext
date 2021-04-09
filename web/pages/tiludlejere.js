@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import MarkDown from "../components/MarkDown";
 import PageContent from "../components/PageContent";
 
-function Tiludlejere({properties,pagemeta,pagecontent}) {
+function Tiludlejere({properties,pagemeta,pagecontent, footer}) {
 
     return (
         <div>
@@ -32,7 +32,7 @@ function Tiludlejere({properties,pagemeta,pagecontent}) {
                 <PageContent contents={pagecontent?.content}/>
 
             </main>
-            <Footer/>
+            <Footer footer={footer}/>
 
         </div>
     )
@@ -42,12 +42,13 @@ export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
     let pagemetatask = fetchAPI("pagemetas");
     let tiludlejeretask = fetchAPI("tiludlejere");
+    let footerTask = fetchAPI("footer")
     let properties=  await propertytask;
     let pagemetas = await pagemetatask;
     let pagecontent = await tiludlejeretask;
 
 
-    return {props:{properties:properties,pagemetas:pagemetas,pagecontent:pagecontent}}
+    return {props:{properties:properties,pagemetas:pagemetas,pagecontent:pagecontent, footer: await footerTask}}
 }
 
 export default Tiludlejere;

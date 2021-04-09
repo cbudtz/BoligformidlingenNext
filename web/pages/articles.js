@@ -8,7 +8,7 @@ import {getStrapiMedia} from "../lib/media";
 import Footer from "../components/Footer";
 import MarkDown from "../components/MarkDown";
 
-function Articles({properties, articles,pagemeta}) {
+function Articles({properties, articles,pagemeta, footer}) {
     console.log(articles)
 
 
@@ -54,7 +54,7 @@ function Articles({properties, articles,pagemeta}) {
 
                 </Container>
             </main>
-            <Footer/>
+            <Footer footer={footer}/>
 
         </div>
     )
@@ -64,11 +64,12 @@ export async function getServerSideProps(context){
     let propertytask = fetchAPI("properties");
     let articletask = fetchAPI("articles");
     let pagemetatask = fetchAPI("pagemetas");
+    let footerTask = fetchAPI("footer");
     let pagemeta = await pagemetatask;
     let properties=  await propertytask;
     let articles = await articletask;
 
-    return {props:{properties:properties, articles:articles,pagemeta:pagemeta}}
+    return {props:{properties:properties, articles:articles,pagemeta:pagemeta, footer:await footerTask}}
 }
 
 export default Articles;

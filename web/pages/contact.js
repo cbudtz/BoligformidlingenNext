@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import Jumbo from "../components/Jumbo";
 import PageContent from "../components/PageContent";
 
-function Contact({properties,pagemeta, pagecontent}) {
+function Contact({properties,pagemeta, pagecontent, footer}) {
     const [submitted, setSubmitted] = useState(false)
     return (
         <div>
@@ -116,7 +116,7 @@ function Contact({properties,pagemeta, pagecontent}) {
                     </Formik>
 
                 </Container>
-                <Footer/>
+                <Footer footer={footer}/>
             </main>
 
         </div>
@@ -127,9 +127,10 @@ export async function getServerSideProps(context){
     let propertiestask =  fetchAPI("properties");
     let pagemetatask =  fetchAPI("pagemetas?key=contact");
     let contactmaterialtask = fetchAPI("contact");
+    let footerTask= fetchAPI("footer");
     const pagecontent = await contactmaterialtask;
     const pagemeta = await pagemetatask
-    return {props:{properties:await propertiestask, pagemeta: pagemeta && pagemeta[0], pagecontent:pagecontent}}
+    return {props:{properties:await propertiestask, pagemeta: pagemeta && pagemeta[0], pagecontent:pagecontent, footer: await footerTask}}
 }
 
 export default Contact;
