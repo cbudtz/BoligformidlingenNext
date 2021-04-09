@@ -1,24 +1,25 @@
 import {Col, Row, Container} from "react-bootstrap";
 import React from "react";
 import {useRouter} from "next/router";
+import {getStrapiMedia} from "../lib/media";
+import MarkDown from "./MarkDown";
 
 
-function Footer({pagematerials}){
+function Footer({footer}){
     // let router= useRouter();
-    const footerText = pagematerials?.find((page)=>page.key==="footertext")
     const socialicon = {fontSize:29,border:1,borderStyle:"solid",borderColor:"#ccc", borderRadius:"50%",
         display:"inline-block",width:"40px",height:"40px", marginLeft:"20px", lineHeight:"40px",textAlign:"center"};
     return  (<>
+        {JSON.stringify(footer)}
         <Container>
         <hr/>
         <Row>
             <Col md={4} >
-                <img width={210} height={63} src={"/images/boligformidlingen.png"} alt={"Boligformidlingen"}/>
+                <img width={210} height={63} src={getStrapiMedia(footer.logo)} alt={"Boligformidlingen"}/>
                 <p>
-                    Holmebjerg 21<br/>
-                    DK - 2950 Vedbæk<br/>
-                    +45 60931453<br/>
-                    <a href={"mailto:udlej@boligformidlingen.com"} rel="noopener">udlej@boligformidlingen.com</a>
+                    <MarkDown>
+                        {footer.address}
+                    </MarkDown>
                 </p>
 
             </Col>
@@ -42,7 +43,7 @@ function Footer({pagematerials}){
                     <blockquote>
                         <p>
                             <em>
-                                {footerText?.text}
+                                {footer.text}
                             </em>
                         </p>
                     </blockquote>
