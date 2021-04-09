@@ -12,7 +12,7 @@ import PageContent from "../components/PageContent";
 import CookieHandler from "../components/CookieHandler";
 
 
-function Index({properties,pagematerials,pagemeta, pagecontent, footer}) {
+function Index({properties,pagemeta, pagecontent, footer}) {
     const index= pagemeta;
 
     function formatTitle(Title) {
@@ -85,7 +85,7 @@ function Index({properties,pagematerials,pagemeta, pagecontent, footer}) {
                     </Row>
                 </Container>
                 <CookieHandler/>
-                <Footer footer={footer} pagematerials={pagematerials}/>
+                <Footer footer={footer}/>
                 <div id={"cookiemonster"}>
                     <script id="CookieDeclaration" src="https://consent.cookiebot.com/cc09b387-dd74-42a2-90ad-ddef37e1e59b/cd.js" type="text/javascript" async/>
                 </div>
@@ -98,15 +98,13 @@ function Index({properties,pagematerials,pagemeta, pagecontent, footer}) {
 
 export async function getStaticProps(){
     let propertytask = fetchAPI("properties?_sort=order:ASC");
-    let pagetask = fetchAPI("pagematerials");
     let pagecontenttask = fetchAPI("frontpage");
     let pagemetatask = fetchAPI("pagemetas?key=index");
     let footertask = fetchAPI("footer")
     let properties=  await propertytask;
-    let pagematerials = await pagetask;
     let pagemeta = await pagemetatask;
 
-    return {props:{properties:properties, pagematerials:pagematerials, pagemeta: pagemeta && pagemeta[0], pagecontent:await pagecontenttask, footer: await footertask},revalidate:10}
+    return {props:{properties:properties, pagemeta: pagemeta && pagemeta[0], pagecontent:await pagecontenttask, footer: await footertask},revalidate:10}
 }
 
 export default Index;
