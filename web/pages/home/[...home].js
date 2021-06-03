@@ -2,11 +2,14 @@ import Head from 'next/head'
 import {fetchAPI, getStrapiURL} from "../../lib/api";
 import {getStrapiMedia} from "../../lib/media";
 import TopBar from "../../components/TopBar";
-import React from "react";
+import React, {useState} from "react";
 import {Carousel, Col, Container, Row} from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
+import {resolveImage, useWindow} from "../../lib/window";
 
 function Home({property, properties}) {
+    const  [windowWidth, setWindowWidth] = useState(2000)
+    useWindow(setWindowWidth);
     return (
         <div>
             <Head>
@@ -25,17 +28,18 @@ function Home({property, properties}) {
                     <Row>
                         <Col md={8}>
                             <Carousel>
-                                {property.images.map((image)=>
+                                {property.images.map((image)=> {
+                                    image = resolveImage(windowWidth, image);
+                                    return (<Carousel.Item key={image.id}>
+                                            <img style={{maxWidth: "100%", maxHeight: "100%"}} src={getStrapiMedia(image)}
+                                                //              srcSet={`${getStrapiMedia(image.formats.small)} 750w,
+                                                // ${getStrapiMedia(image.formats.medium)} 1000w,
+                                                // ${getStrapiMedia(image.formats.large)} 1500w`}
+                                                 alt={image.name}
+                                            />
 
-                                    <Carousel.Item key={image.id}>
-                                        <img style={{maxWidth:"100%", maxHeight:"100%"}} src={getStrapiMedia(image)}
-                                //              srcSet={`${getStrapiMedia(image.formats.small)} 750w,
-                                // ${getStrapiMedia(image.formats.medium)} 1000w,
-                                // ${getStrapiMedia(image.formats.large)} 1500w`}
-                                             alt={image.name}
-                                        />
-
-                                    </Carousel.Item>
+                                        </Carousel.Item>)
+                                    }
                                 )}
                             </Carousel>
                         </Col>
